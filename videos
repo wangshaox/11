@@ -1,0 +1,26 @@
+-- video_db.videos definition
+
+CREATE TABLE `videos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文标题',
+  `title_en` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '英文标题',
+  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci COMMENT '中文描述',
+  `description_en` text COLLATE utf8mb4_unicode_ci COMMENT '英文描述',
+  `thumbnail` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '缩略图URL',
+  `video_url` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '视频URL',
+  `duration` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '视频时长',
+  `views` int DEFAULT '0' COMMENT '观看次数',
+  `category` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '中文分类',
+  `category_en` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '英文分类',
+  `author` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作者/频道名',
+  `author_en` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `idx_category` (`category`),
+  KEY `idx_category_en` (`category_en`),
+  KEY `idx_created_at` (`created_at`),
+  FULLTEXT KEY `idx_search` (`title`,`title_en`,`description`,`description_en`)
+) ENGINE=InnoDB AUTO_INCREMENT=3341 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
